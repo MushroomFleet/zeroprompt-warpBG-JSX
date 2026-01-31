@@ -1,275 +1,349 @@
-# ZeroPrompt WarpBG JSX
+# ZeroPrompt Warp Background JSX V2
 
-A mesmerizing React component that creates an immersive warp tunnel effect with procedurally generated AI art prompts displayed on dynamic 3D billboards. Built with Three.js and React, featuring smooth animations, interactive speed controls, and deterministic prompt generation.
+**Multi-line Elastic Billboards with JSON Profile Support**
 
-![ZeroPrompt WarpBG Demo](https://img.shields.io/badge/Demo-Live-00CED1?style=for-the-badge)
-![React](https://img.shields.io/badge/React-18+-61DAFB?style=for-the-badge&logo=react)
-![Three.js](https://img.shields.io/badge/Three.js-0.157+-000000?style=for-the-badge&logo=three.js)
+A React/Three.js visualization of procedural prompt generation using position-is-seed methodology. Creates an infinite warp tunnel of dynamically generated AI prompts with speed-reactive scaling and customizable vocabulary profiles.
 
-## ✨ Features
+![Version](https://img.shields.io/badge/version-2.0.0-00CED1)
+![React](https://img.shields.io/badge/react-18+-61DAFB)
+![Three.js](https://img.shields.io/badge/three.js-r128-000000)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-### Visual Experience
-- 🌌 **Immersive Warp Tunnel** - Dynamic 3D billboard system with teal particle effects
-- 📝 **Procedural Text Generation** - Infinite unique AI art prompts using position-based seeding
-- 🎨 **Multi-line Billboard Text** - Landscape-oriented billboards with intelligent text wrapping
-- 🔄 **Bidirectional Movement** - Toggle between forward (approaching) and backward (receding) warp effects
-- 💫 **Smooth Animations** - Lerp-based speed transitions with no sudden movements
-- 🌓 **Dynamic Opacity** - Billboards fade gracefully into the distance in backward mode
+---
 
-### Interactive Controls
-- ⌨️ **Keyboard Speed Control** - Adjust warp speed on the fly (keys: 1, 2, 3)
-- 🔀 **Direction Toggle** - Switch between forward and backward movement (key: 5)
-- 📏 **Dynamic Scaling** - Text size and billboard dimensions scale with speed
-- ⚡ **Particle Density** - Particle count adjusts based on speed for optimal performance
+## 🚀 Quick Start
 
-### Technical Features
-- 🎯 **Deterministic Generation** - Same seed + index = same prompt, always
-- 🧹 **Memory Efficient** - Proper cleanup and resource management
-- 📱 **Responsive** - Auto-adjusts to window resizing
-- ⚛️ **React 18+ Compatible** - Modern React with hooks
-- 🎮 **Zero Dependencies** - Only requires React and Three.js
+### Try the Demo
 
-## 🎮 Quick Start
-
-### Option 1: Instant Preview (No Installation)
-
-Open `demo.html` in your browser for an immediate preview:
+Open `demo-V2.html` in your browser for an instant preview:
 
 ```bash
-# Clone the repository
+# Clone repository
 git clone https://github.com/MushroomFleet/zeroprompt-warpBG-JSX.git
 cd zeroprompt-warpBG-JSX
 
-# Open demo.html in your browser
-# Double-click demo.html or:
-open demo.html  # macOS
-start demo.html # Windows
-xdg-open demo.html # Linux
+# Open demo (no build required!)
+open demo-V2.html
 ```
 
-The demo includes:
-- ✅ Full keyboard controls overlay
-- ✅ Interactive help menu (toggle with button)
-- ✅ All features demonstrated in real-time
+**Features:**
 - ✅ No build process required
+- ✅ CSP-compliant (uses whitelisted CDNs)
+- ✅ Works in any subfolder (e.g., `/prompt-warp-2/`)
+- ✅ Pure JavaScript (no JSX compilation)
+- ✅ Two embedded profiles: Default & Volkyri Aesthetic
+- ✅ Eight color themes: Teal, Magenta, Orange, Lime, Purple, Gold, Crimson, Cyan
+- ✅ Press 'P' to switch profiles, 'C' to cycle colors, 'I' for controls
 
-### Option 2: Integrate Into Your React Project
+**[View Live Demo](demo-V2.html)** (Download and open locally)
 
-1. **Install Dependencies**
-   ```bash
-   npm install three
-   ```
+### Basic Integration
 
-2. **Copy the Component**
-   ```bash
-   # Copy ZeroPromptWarpBG.jsx to your components directory
-   cp ZeroPromptWarpBG.jsx your-project/src/components/
-   ```
+```bash
+# Install dependencies
+npm install react react-dom three
 
-3. **Import and Use**
-   ```jsx
-   import ZeroPromptWarpBG from './components/ZeroPromptWarpBG';
-
-   function App() {
-     return <ZeroPromptWarpBG />;
-   }
-   ```
-
-For detailed integration instructions, see **[Integration Guide](zeroprompt-warpBG-JSX-integration.md)**
-
-## 🎹 Keyboard Controls
-
-| Key | Action | Description |
-|-----|--------|-------------|
-| `1` | Slow Down | Decrease speed by 10% (min: 0.1x) |
-| `2` | Reset Speed | Return to default speed (1.0x) |
-| `3` | Speed Up | Increase speed by 10% (max: 5.0x) |
-| `5` | Toggle Direction | Switch between forward/backward warp |
-
-### Speed Effects
-- **Slower speeds** = Larger billboards, bigger text, fewer particles
-- **Faster speeds** = Smaller billboards, smaller text, more particles
-- All transitions are smoothly interpolated using lerp
-
-## 🚀 How It Works
-
-### ZeroPrompt Methodology
-The component uses a **position-is-seed** approach for deterministic procedural generation:
-
-1. **Coordinate-Based Hashing** - Each prompt index is hashed with a world seed
-2. **Vocabulary Pools** - Subjects, actions, environments, styles, and moods
-3. **Template System** - Multiple prompt structure templates for variety
-4. **Deterministic Output** - Same `(seed, index)` always produces the same prompt
-
-### Technical Architecture
-
-```
-┌─────────────────────────────────────────┐
-│  React Component (useEffect)            │
-├─────────────────────────────────────────┤
-│  Three.js Scene Setup                   │
-│  ├─ Camera (PerspectiveCamera)         │
-│  ├─ Renderer (WebGLRenderer)           │
-│  └─ Scene (Black void background)      │
-├─────────────────────────────────────────┤
-│  Billboard System (30 billboards)      │
-│  ├─ Canvas text rendering              │
-│  ├─ Multi-line text wrapping           │
-│  ├─ Dynamic size scaling                │
-│  └─ Opacity fade (backward mode)       │
-├─────────────────────────────────────────┤
-│  Particle System (100-1000 particles)  │
-│  ├─ Teal particles (#00CED1)           │
-│  ├─ Dynamic count based on speed       │
-│  └─ Recycling/respawn logic            │
-├─────────────────────────────────────────┤
-│  Animation Loop                         │
-│  ├─ Speed lerping                       │
-│  ├─ Position updates                    │
-│  ├─ Billboard rotation (face camera)   │
-│  └─ Particle movement                   │
-└─────────────────────────────────────────┘
+# Copy component to your project
+cp ZeroPromptWarpBG-V2.jsx src/components/
 ```
 
-### Prompt Generation Example
+```jsx
+import ZeroPromptWarpBGV2 from './components/ZeroPromptWarpBG-V2';
+
+function App() {
+  return <ZeroPromptWarpBGV2 />;
+}
+```
+
+**[See Full Integration Guide →](zeroprompt-warpBG-JSX-V2-integration.md)**
+
+---
+
+## ✨ Features
+
+### 🎨 Dynamic Visual System
+- **Elastic Multi-line Billboards**: Text wraps intelligently at ~50 characters per line
+- **Speed-Based Scaling**: Slower speed = larger text (inverse relationship)
+- **Particle Density Control**: More particles at high speed for intense warp effect
+- **Landscape Aspect Ratio**: Consistent width with adaptive height
+- **Full Prompt Display**: No truncation - complete prompts visible
+
+### 📦 Profile System
+- **JSON Profile Support**: Upload custom vocabulary sets
+- **Multi-Profile Management**: Load and switch between multiple profiles
+- **Embedded Default**: Ships with 188+ trillion prompt combinations
+- **Real-time Validation**: Automatic structure checking with error messages
+- **Profile Statistics**: Shows templates, pools, and total combinations
+
+### 🎮 Interactive Controls
+- **Keyboard Controls**: 
+  - `1/2/3`: Speed control (-10%, reset, +10%)
+  - `5`: Reverse direction
+  - `C`: Cycle color theme
+  - `P`: Switch profile
+  - `S`: New random seed
+  - `H`: Toggle UI
+- **Speed Range**: 0.1x to 5.0x with smooth interpolation
+- **Direction Toggle**: Forward/backward warp motion
+- **Seed Randomization**: Explore different prompt universes
+- **Collapsible UI**: Clean, glassmorphic control panel
+- **Color Themes**: 8 vibrant color palettes (Teal, Magenta, Orange, Lime, Purple, Gold, Crimson, Cyan)
+
+### 🛡️ Robust Engineering
+- **WebGL Detection**: Pre-flight checks with helpful error messages
+- **Resource Cleanup**: Proper disposal prevents memory leaks
+- **Error Handling**: Graceful degradation with troubleshooting steps
+- **Cross-Browser**: Tested on Chrome, Firefox, Edge, Safari
+
+---
+
+## 🎯 What It Does
+
+ZeroPrompt Warp BG creates an infinite tunnel of procedurally generated AI image prompts. Using position-is-seed methodology, the same seed always produces the same prompts, making generation:
+
+- **Deterministic**: Same inputs → same outputs, always
+- **O(1) Fast**: Constant-time generation regardless of prompt index
+- **Infinite**: Generate prompts at any coordinate in an infinite space
+- **Cross-Platform**: JavaScript and Python implementations produce identical results
+
+Perfect for:
+- **Visual Backgrounds**: Dynamic content for websites/apps
+- **Prompt Exploration**: Discovering AI prompt combinations
+- **Creative Inspiration**: Infinite semantic possibilities
+- **Educational Demos**: Teaching procedural generation concepts
+
+---
+
+## 📊 Technical Highlights
+
+### Position-is-Seed Generation
 
 ```javascript
-// Given seed=42, index=0
-generatePrompt(42, 0)
-// Output: "a knight exploring a crystal cave, cinematic, mysterious atmosphere"
-
-// Same inputs always produce same output
-generatePrompt(42, 0) === generatePrompt(42, 0) // true
+hash = simpleHash(seed, promptIndex, componentIndex)
+selectedValue = pool[hash % pool.length]
 ```
 
-## 📊 Performance
+Same `(seed, promptIndex, profile)` → Same prompt, everywhere, always
 
-### Default Configuration
-- **Billboards:** 30 active at any time
-- **Particles:** 100-1000 (scales with speed)
-- **Canvas Resolution:** 2048×768 per billboard
-- **Target FPS:** 60 FPS
-- **Memory:** Automatic cleanup on unmount
+### Speed-Based Dynamic Scaling
 
-### Optimization Tips
-- Reduce `numBillboards` for lower-end devices
-- Lower canvas resolution in `createBillboard()`
-- Decrease `particleCount` maximum
-- Use the component sparingly (one instance per page)
-
-## 🛠️ Customization
-
-The component is highly customizable:
-
-### Vocabulary Pools
-Modify the arrays in the component to change prompt generation:
-- `SUBJECTS` - Characters and entities
-- `ACTIONS` - Verbs and activities  
-- `ENVIRONMENTS` - Settings and locations
-- `STYLES` - Art styles and aesthetics
-- `MOOD` - Emotional atmospheres
-
-### Visual Settings
-```jsx
-// Billboard appearance
-const fontSize = Math.floor(120 / Math.max(0.5, currentSpeed));
-const sizeMultiplier = 1 / Math.max(0.3, currentSpeed);
-
-// Particle color
-color: 0x00CED1 // Teal (change to any hex color)
-
-// Number of billboards
-const numBillboards = 30; // Adjust for performance
+**Text Scaling (Inverse)**
+```javascript
+speedScale = 1.0 / sqrt(currentSpeed)
+// 0.1x speed → 2.0x scale (large, readable)
+// 1.0x speed → 1.0x scale (normal)
+// 5.0x speed → 0.6x scale (compact, high-speed)
 ```
 
-See the **[Integration Guide](zeroprompt-warpBG-JSX-integration.md)** for detailed customization instructions.
+**Particle Density (Direct)**
+```javascript
+particleCount = min(1000, 100 + speed × 900)
+// 0.1x speed → ~190 particles (calm)
+// 1.0x speed → 1000 particles (standard)
+// 5.0x speed → 1000 particles (maximum intensity)
+```
 
-## 📁 Project Structure
+### Performance
+
+- **30 Billboards**: Simultaneous render with recycling
+- **1000 Particles**: Adaptive density based on speed
+- **Dynamic LOD**: Particle count scales automatically
+- **Efficient Recycling**: Billboards regenerate when out of view
+
+### Demo Implementation
+
+The standalone demo (`demo-V2.html`) is:
+- **CSP-Compliant**: Uses only whitelisted CDNs (cdnjs.cloudflare.com)
+- **Pure JavaScript**: No JSX/Babel compilation required
+- **Subfolder-Ready**: Works in any path including `/prompt-warp-2/`
+- **Zero Dependencies**: Self-contained with external CDN resources
+
+---
+
+## 📁 Repository Structure
 
 ```
 zeroprompt-warpBG-JSX/
-├── ZeroPromptWarpBG.jsx              # Main React component
-├── demo.html                          # Standalone demo (no build required)
-├── zeroprompt-warpBG-JSX-integration.md  # Integration guide
-├── README.md                          # This file
-└── DJZ_ZeroPrompt_V1.py              # Original Python ComfyUI node
+├── ZeroPromptWarpBG-V2.jsx          # Main React component
+├── demo-V2.html                      # Standalone demo (no build!)
+├── default.json                      # Default vocabulary profile
+├── volkyri-zeroprompt-v2.json       # Volkyri aesthetic profile
+├── README.md                         # This file
+├── zeroprompt-warpBG-JSX-V2-integration.md  # Developer guide
+└── profiles/                         # Custom profile examples
+    └── (your custom .json files)
 ```
 
-## 🔧 Browser Compatibility
+**Note:** The demo (`demo-V2.html`) has both profiles embedded for security. The component (`ZeroPromptWarpBG-V2.jsx`) supports runtime JSON profile uploads.
 
-- ✅ Chrome/Edge 90+
-- ✅ Firefox 88+
-- ✅ Safari 14+
-- ✅ Opera 76+
+---
 
-**Requirements:**
-- WebGL support
-- ES6+ JavaScript support
-- Canvas API support
+## 🎨 Profile Format
 
-## 📖 Documentation
+Create custom vocabularies with JSON files:
 
-- **[Integration Guide](zeroprompt-warpBG-JSX-integration.md)** - Comprehensive setup instructions
-- **[Demo](demo.html)** - Live interactive demonstration
-- **Source Code** - Fully commented for easy understanding
+```json
+{
+  "name": "My Profile",
+  "description": "Custom prompt vocabulary",
+  "version": "1.0.0",
+  "templates": [
+    "{subject} {action} {environment}, {style}, {mood}"
+  ],
+  "pools": {
+    "subject": ["a warrior", "a mage", "a dragon"],
+    "action": ["fighting in", "exploring", "guarding"],
+    "environment": ["a castle", "a forest", "a dungeon"],
+    "style": ["epic", "cinematic", "dramatic"],
+    "mood": ["intense", "mysterious", "heroic"]
+  }
+}
+```
 
-## 🎯 Use Cases
+**Total Combinations**: `templates × pool1 × pool2 × ... × poolN`
 
-- 🎨 **Background Effects** - Dynamic backgrounds for creative web applications
-- 🎮 **Game Menus** - Immersive menu backgrounds for web games
-- 🖼️ **Art Installations** - Digital art displays and installations
-- 📱 **Landing Pages** - Eye-catching hero sections
-- 🎭 **Creative Portfolios** - Unique portfolio backgrounds
-- 🎬 **Media Players** - Visualizer effects for media applications
+Upload via the UI or embed directly in the component.
 
-## 🤝 Contributing
+### Included Profiles
 
-Contributions are welcome! Please feel free to submit pull requests or open issues for:
-- Bug fixes
-- Performance improvements
-- New features
-- Documentation improvements
-- Additional vocabulary pools
+**Default Profile** (`default.json`)
+- General-purpose AI image prompt vocabulary
+- 8 semantic pools (subject, action, environment, style, lighting, camera, details, mood)
+- 188+ trillion unique combinations
+- Suitable for any image generation workflow
 
-## 📝 Version History
+**Volkyri Profile** (`volkyri-zeroprompt-v2.json`)
+- Specialized sci-fi aesthetic generator
+- Ancient starfaring warrior-attendants from Hel Vortex system
+- Distinctive features: asymmetrical half-horn, metallic bodysuits, dramatic lighting
+- 15+ semantic pools for highly specific prompts
+- Perfect for character design and worldbuilding
 
-### v1.0.0 (2025)
-- Initial release
-- Core warp tunnel functionality
-- Keyboard speed controls
-- Bidirectional movement toggle
-- Procedural prompt generation
-- Smooth lerp transitions
-- Dynamic text/billboard scaling
-- Particle system with density scaling
+Press `P` in the demo to switch between profiles and experience the difference!
 
-## 🔗 Links
+---
 
-- **Repository:** https://github.com/MushroomFleet/zeroprompt-warpBG-JSX
-- **Issues:** https://github.com/MushroomFleet/zeroprompt-warpBG-JSX/issues
-- **Discussions:** https://github.com/MushroomFleet/zeroprompt-warpBG-JSX/discussions
+## 🎮 Keyboard Controls
 
-## 📄 License
+| Key | Action |
+|-----|--------|
+| `1` | Decrease speed by 10% |
+| `2` | Reset speed to 1.0x |
+| `3` | Increase speed by 10% |
+| `5` | Reverse warp direction |
+| `C` | Cycle color theme (8 colors) |
+| `P` | Switch profile (Default ↔ Volkyri) |
+| `S` | Generate new random seed |
+| `H` | Toggle UI visibility |
+| `I` | Toggle info panel (demo only) |
 
-This project is available for use in personal and commercial projects.
+---
+
+## 🔧 Integration Paths
+
+### Standalone HTML
+```html
+<!-- Just open in browser -->
+demo-V2.html
+```
+
+### React Project
+```bash
+npm install three
+# Copy ZeroPromptWarpBG-V2.jsx to your components
+```
+
+### Next.js
+```jsx
+import dynamic from 'next/dynamic';
+const ZeroPromptWarpBG = dynamic(() => import('./ZeroPromptWarpBG-V2'), { ssr: false });
+```
+
+### Vite
+```bash
+npm create vite@latest
+npm install three
+# Copy component
+```
+
+**[Full Integration Guide →](zeroprompt-warpBG-JSX-V2-integration.md)**
+
+---
+
+## 🐛 Troubleshooting
+
+### WebGL Context Error
+
+**Most Common Fix**: Simply refresh the page
+
+Browsers limit WebGL contexts (8-16 max). Hot-reloading in development can exhaust contexts.
+
+**Solutions:**
+1. Refresh the page
+2. Close other tabs using WebGL
+3. Enable hardware acceleration in browser settings
+4. Update graphics drivers
+
+### Performance Issues
+
+Reduce resource usage:
+
+```jsx
+const numBillboards = 15;        // Default: 30
+const particleCount = 500;       // Default: 1000
+renderer.setPixelRatio(1);       // Default: min(devicePixelRatio, 2)
+const renderer = new THREE.WebGLRenderer({ antialias: false });
+```
+
+**[See Full Troubleshooting Guide →](zeroprompt-warpBG-JSX-V2-integration.md#troubleshooting)**
+
+---
+
+## 🤝 Related Projects
+
+- **[DJZ-ZeroPrompt-V2](https://github.com/MushroomFleet/DJZ-ZeroPrompt)**: ComfyUI custom node (Python implementation)
+- **ZeroBytes Methodology**: Position-is-seed procedural generation
+- **ComfyUI**: Node-based AI image generation
+
+---
+
+## 📜 License
+
+MIT License - Free to use in commercial and personal projects
+
+---
 
 ## 📚 Citation
 
 ### Academic Citation
+
 If you use this codebase in your research or project, please cite:
+
 ```bibtex
 @software{zeroprompt_warpbg_jsx,
-  title = {ZeroPrompt WarpBG JSX: Procedural Warp Tunnel with AI Prompt Generation},
+  title = {ZeroPrompt Warp Background JSX: Multi-line Elastic Billboards with JSON Profile Support},
   author = {Drift Johnson},
   year = {2025},
   url = {https://github.com/MushroomFleet/zeroprompt-warpBG-JSX},
-  version = {1.0.0}
+  version = {2.0.0}
 }
 ```
 
 ### Donate
+
 [![Ko-Fi](https://cdn.ko-fi.com/cdn/kofi3.png?v=3)](https://ko-fi.com/driftjohnson)
 
 ---
 
-**Made with ❤️ by Drift Johnson** | [GitHub](https://github.com/MushroomFleet) | [Ko-fi](https://ko-fi.com/driftjohnson)
+## 🙏 Acknowledgments
+
+- **Three.js Team**: Amazing 3D library
+- **React Team**: Excellent UI framework  
+- **Position-is-Seed**: ZeroBytes methodology
+- **Community**: Beta testers and contributors
+
+---
+
+**Built with ❤️ by Drift Johnson**
+
+[Report Issues](https://github.com/MushroomFleet/zeroprompt-warpBG-JSX/issues) • [Discussions](https://github.com/MushroomFleet/zeroprompt-warpBG-JSX/discussions) • [Ko-Fi](https://ko-fi.com/driftjohnson)
